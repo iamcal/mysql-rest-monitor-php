@@ -32,16 +32,11 @@ EOQ;
 		exit();
 	}
 
-echo $queries['TABLE_STATS'];
 
 	$q = mysqli_stmt_init($db);
-	print_r($q);
-
 	$ok = mysqli_stmt_prepare($q, $queries['TABLE_STATS']);
 	if (!$ok){
-		$error = mysqli_connect_error();
-		$errno = mysqli_connect_errno();
-		print "$errno: $error\n";
+		print_r(mysqli_error_list($db));
 		die("failed prepare\n");
 	}
 	mysqli_stmt_bind_param($q, 'ss', $a, $b);
